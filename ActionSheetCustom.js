@@ -1,7 +1,8 @@
 'use strict';
 
-import React, {
-	View, Text, PropTypes, Dimensions, Animated, TouchableHighlight, TouchableWithoutFeedback
+import React, {PropTypes, Component} from 'react';
+import {
+	View, Text, Dimensions, Animated, TouchableHighlight, TouchableWithoutFeedback
 } from 'react-native';
 
 import styles, {btnStyle, sheetStyle, RADIUS} from './styles';
@@ -14,8 +15,8 @@ const WARN_COLOR = '#ff3b30';
 
 
 
-class ActionSheet extends React.Component {
-	
+class ActionSheet extends Component {
+
 	constructor(props) {
 		super(props);
 
@@ -70,7 +71,7 @@ class ActionSheet extends React.Component {
 
 	_calculateHeight() {
 		let count = this.props.options.length;
-		if (this.props.title) count += 1; 
+		if (this.props.title) count += 1;
 		return BUTTON_H * count + 20;
 	}
 
@@ -79,7 +80,7 @@ class ActionSheet extends React.Component {
 			return (
 				<View style={sheetStyle.title}>
 					<Text style={sheetStyle.titleText}>{this.props.title}</Text>
-				</View>	
+				</View>
 			);
 		} else {
 			return null;
@@ -90,10 +91,10 @@ class ActionSheet extends React.Component {
 		let {options, cancelButtonIndex, tintColor} = this.props;
 		if (cancelButtonIndex > -1 && options[cancelButtonIndex]) {
 			return (
-				<TouchableHighlight 
-					activeOpacity={1} 
-					underlayColor="#f4f4f4" 
-					style={[btnStyle.wrapper, {marginTop: 6}]} 
+				<TouchableHighlight
+					activeOpacity={1}
+					underlayColor="#f4f4f4"
+					style={[btnStyle.wrapper, {marginTop: 6}]}
 					onPress={this.hide.bind(this, cancelButtonIndex)}
 				>
 					<Text style={[btnStyle.title, {fontWeight: '700', color: tintColor}]}>{options[cancelButtonIndex]}</Text>
@@ -106,11 +107,11 @@ class ActionSheet extends React.Component {
 
 	_createButton(title, fontColor, index, style) {
 		return (
-			<TouchableHighlight 
+			<TouchableHighlight
 				key={index}
-				activeOpacity={1} 
-				underlayColor="#f4f4f4" 
-				style={[btnStyle.wrapper, style || {}]} 
+				activeOpacity={1}
+				underlayColor="#f4f4f4"
+				style={[btnStyle.wrapper, style || {}]}
 				onPress={this.hide.bind(this, index)}
 			>
 				<Text style={[btnStyle.title, {color: fontColor}]}>{title}</Text>
@@ -136,15 +137,15 @@ class ActionSheet extends React.Component {
 				<View style={styles.wrapper}>
 					<TouchableWithoutFeedback onPress={this.hide.bind(this)}>
 						<Animated.View style={[styles.overlay, {opacity: state.fadeAnim}]}></Animated.View>
-					</TouchableWithoutFeedback>	
-					<Animated.View 
-						ref={o => this.sheet = o} 
+					</TouchableWithoutFeedback>
+					<Animated.View
+						ref={o => this.sheet = o}
 						style={[sheetStyle.wrapper, {transform: [{translateY: state.sheetAnim}]}]}
 					>
 						<View style={sheetStyle.options}>
 							{this._renderTitle()}
 							{this._renderOptions()}
-						</View>	
+						</View>
 						{this._renderCancelButton()}
 					</Animated.View>
 				</View>
@@ -169,8 +170,3 @@ ActionSheet.defaultProps = {
 
 
 export default ActionSheet;
-
-
-
-
-

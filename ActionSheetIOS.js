@@ -1,13 +1,14 @@
 'use strict';
 
-import React, {ActionSheetIOS, PropTypes} from 'react-native';
+import React, {PropTypes} from 'react';
+import {ActionSheetIOS} from 'react-native';
 
 
 const optionNames = [
-	'title', 
-	'options', 
+	'title',
+	'options',
 	'tintColor',
-	'cancelButtonIndex', 
+	'cancelButtonIndex',
 	'destructiveButtonIndex'
 ];
 
@@ -36,7 +37,7 @@ class ActionSheet extends React.Component {
             return obj;
         }, {});
 		ActionSheetIOS.showActionSheetWithOptions(options, props.onPress);
-	}	
+	}
 
 	render() {
 		return null;
@@ -59,7 +60,3 @@ ActionSheet.defaultProps = {
 
 
 export default ActionSheet;
-
-
-
-
